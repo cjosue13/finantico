@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-raw-text */
-import {Box, Center, HStack, Pressable} from 'native-base';
+import {Box, Center, HStack, Pressable, Text} from 'native-base';
 import React, { useState } from 'react';
-import { Text } from 'react-native-svg';
 import {useAuth} from '../context/AuthContext';
 import RegisterExpenses from './RegisterExpenses';
 import RegisterIncome from './RegisterIncome';
@@ -10,13 +9,13 @@ const HomeScreen = () => {
   const [selected, setSelected] = useState(0);
   const {logout} = useAuth();
   return (
-    <Box width="100%" flex={1} bg="white" safeAreaTop>
+    <Box flex={1} bg="white" safeAreaTop>
       <Center flex={1}>
         {selected === 0 && <RegisterExpenses colorTitle={'#000000'} />}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterIncome />}
       </Center>
-      <HStack width="" bg="#01234c" alignItems="center" safeAreaBottom>
+      <HStack bg="#01234c" alignItems="center" safeAreaBottom>
         <Pressable
           opacity={selected === 0 ? 1 : 0.5}
           py="3"
