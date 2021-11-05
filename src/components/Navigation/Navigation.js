@@ -18,12 +18,12 @@ const Navigation = () => {
     }
   });
 
+  if (user) return <HomeScreen />;
+
   return (
     <Center bg="#01234c" flex={1} px="3">
       <Box h="90%" w="100%" alignItems="flex-start">
-        {user ? (
-          <HomeScreen />
-        ) : login ? (
+        {login ? (
           <LoginScreen setLogin={setLogin} />
         ) : (
           <RegisterScreen setLogin={setLogin} />

@@ -10,15 +10,14 @@ const HomeScreen = () => {
   const [selected, setSelected] = useState(0);
   const {logout} = useAuth();
   return (
-    <Box flex={1} bg="white" safeAreaTop>
+    <Box width="100%" flex={1} bg="white" safeAreaTop>
       <Center flex={1}>
         {selected === 0 && <RegisterExpenses colorTitle={'#000000'} />}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterIncome />}
       </Center>
-      <HStack bg="#01234c" alignItems="center" safeAreaBottom>
+      <HStack width="" bg="#01234c" alignItems="center" safeAreaBottom>
         <Pressable
-          cursor="pointer"
           opacity={selected === 0 ? 1 : 0.5}
           py="3"
           flex={1}
@@ -42,7 +41,6 @@ const HomeScreen = () => {
             </Center>
           </Pressable> */}
         <Pressable
-          cursor="pointer"
           opacity={selected === 1 ? 1 : 0.6}
           py="2"
           flex={1}
@@ -54,7 +52,6 @@ const HomeScreen = () => {
           </Center>
         </Pressable>
         <Pressable
-          cursor="pointer"
           opacity={selected === 2 ? 1 : 0.6}
           py="2"
           flex={1}
