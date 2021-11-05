@@ -1,9 +1,8 @@
 /* eslint-disable react-native/no-raw-text */
 import {Box, Center, HStack, Pressable, Text} from 'native-base';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {useAuth} from '../context/AuthContext';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
-
 
 const HomeScreen = () => {
   const [selected, setSelected] = useState(0);
@@ -11,7 +10,9 @@ const HomeScreen = () => {
   return (
     <Box flex={1} bg="white" safeAreaTop>
       <Center flex={1}>
-        {selected === 0 && <RegisterBudgetDetailScreen colorTitle={'#000000'} />}
+        {selected === 0 && (
+          <RegisterBudgetDetailScreen colorTitle={'#000000'} />
+        )}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterBudgetDetailScreen />}
       </Center>
