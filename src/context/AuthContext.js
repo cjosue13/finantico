@@ -2,9 +2,6 @@ import React, {createContext, useContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 // import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import PropTypes from 'prop-types';
-
-import {useToast} from 'native-base';
-
 export const AuthContext = createContext();
 
 /*GoogleSignin.configure({
@@ -13,7 +10,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
-
   return (
     <AuthContext.Provider
       value={{
@@ -23,7 +19,7 @@ export const AuthProvider = ({children}) => {
           try {
             await auth().signInWithEmailAndPassword(email, password);
           } catch (e) {
-            console.log(e);
+            alert(e);
           }
         },
 
@@ -88,10 +84,7 @@ export const AuthProvider = ({children}) => {
               .then(() => {
                 //Once the user creation has happened successfully, we can add the currentUser into firestore
                 //with the appropriate details.
-                toast.show({
-                  title: 'Registered user successfully.',
-                  placement: 'bottom',
-                });
+                alert('Registered user successfully.');
               })
               //we need to catch the whole sign up process if it fails too.
               .catch(error => {

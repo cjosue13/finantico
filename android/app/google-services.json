@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "738496675630",
+    "project_id": "finantico-f2b6e",
+    "storage_bucket": "finantico-f2b6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738496675630:android:37bb131dea6be9629944bf",
+        "android_client_info": {
+          "package_name": "com.finantico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738496675630-pgs7h28s2v1pprpaf463ervblfhraog6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.finantico",
+            "certificate_hash": "afc54c9e53f65d411a1c72262a8a358c3fed92aa"
+          }
+        },
+        {
+          "client_id": "738496675630-qk3i27is1rrc7dsehrc31e9bjqioube9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF0lPLryFQShL7jLO2MpSTxOQbF5CcL4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738496675630-qk3i27is1rrc7dsehrc31e9bjqioube9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

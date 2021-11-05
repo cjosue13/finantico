@@ -1,10 +1,14 @@
+/* eslint-disable react-native/no-raw-text */
+import { Button } from 'native-base'
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View} from 'react-native'
+import { useAuth } from '../context/AuthContext'
 
 const HomeScreen = () => {
+    const {logout} = useAuth();
     return (
         <View>
-            <Text>HOLA</Text>
+        <Button onPress={() => logout()}>Logout</Button>
         </View>
     )
 }

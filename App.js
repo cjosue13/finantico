@@ -20,17 +20,17 @@ import {
   Code,
 } from 'native-base';
 import NativeBaseIcon from './src/components/NativeBaseIcon';
-import HomeScreen from './src/screens/HomeScreen';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './src/graphql/client';
 import { AuthProvider } from './src/context/AuthContext';
+import Navigation from './src/components/Navigation/Navigation';
 
 const App = () => {
   return (
     <NativeBaseProvider>
       <ApolloProvider client={client}>
         <AuthProvider>
-          <HomeScreen />
+          <Navigation />
         </AuthProvider>
       </ApolloProvider>
     </NativeBaseProvider>
