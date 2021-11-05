@@ -2,6 +2,7 @@
 import {Box, Center, HStack, Pressable, Text} from 'native-base';
 import React, {useState} from 'react';
 import {useAuth} from '../context/AuthContext';
+import PaymentsScreen from './PaymentsScreen';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
 
 const HomeScreen = () => {
@@ -11,7 +12,7 @@ const HomeScreen = () => {
     <Box flex={1} bg="white" safeAreaTop>
       <Center flex={1}>
         {selected === 0 && (
-          <RegisterBudgetDetailScreen colorTitle={'#000000'} />
+          <PaymentsScreen colorTitle={'#000000'} />
         )}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterBudgetDetailScreen />}
@@ -24,7 +25,7 @@ const HomeScreen = () => {
           onPress={() => setSelected(0)}>
           <Center>
             <Text bold color="white" fontSize={18}>
-              Summary
+              Payment
             </Text>
           </Center>
         </Pressable>

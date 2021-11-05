@@ -2,10 +2,11 @@
 import {useQuery} from '@apollo/react-hooks';
 import {Box, Heading, ScrollView, Stack} from 'native-base';
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import {GET_BUDGET_DETAILS_USER} from '../graphql/BudgetDetails/BudgetDetails.queries';
 import {useAuth} from '../context/AuthContext';
+import Loading from '../components/Loading/Loading';
+import PaymentCard from '../components/PaymentCard/PaymentCard';
 
 const PaymentsScreen = ({colorTitle}) => {
   const {user} = useAuth();
@@ -14,10 +15,10 @@ const PaymentsScreen = ({colorTitle}) => {
     pollInterval: 500,
   });
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   if (error) return `Error! ${error}`;
 
-  console.log(data);
+  const budgetDetails = data?.getBudgetDetailsbyUser;
 
   return (
     <Box
@@ -28,7 +29,7 @@ const PaymentsScreen = ({colorTitle}) => {
       mt="5"
       mb="5">
       <Heading textAlign="center" color={colorTitle}>
-        List of Movies
+        List of BudgetDetails
       </Heading>
 
       <ScrollView
@@ -45,7 +46,14 @@ const PaymentsScreen = ({colorTitle}) => {
           w={{
             base: '100%',
             md: '25%',
-          }}></Stack>
+          }}>
+          {budgetDetails.map(budgetDetail => (
+            <PaymentCard
+              key={`budgetDetauk-${budgetDetail.id}`}
+              budgetDetail={budgetDetail}
+            />
+          ))}
+        </Stack>
       </ScrollView>
     </Box>
   );
