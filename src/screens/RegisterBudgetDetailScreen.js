@@ -5,6 +5,7 @@ import {
   FormControl,
   Heading,
   Input,
+  Radio,
   ScrollView,
   Stack,
   Text,
@@ -16,21 +17,23 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {useAuth} from '../context/AuthContext';
 import {useMutation} from '@apollo/client';
 import {SAVE_BUDGET_DETAIL} from '../graphql/BudgetDetails/BudgetDetails.mutations';
+import Loading from '../components/Loading/Loading';
 
 const budgetDetailState = {
   bd_description: '',
   bd_date: new Date(),
   bd_paymentType: 'F',
-  bd_paymentAmount: '1500',
-  bd_type: 'F',
+  bd_paymentAmount: '',
+  bd_type: 'E',
   usu_uid: '',
 };
 
 const validationsState = {
   description: false,
+  amount: false,
 };
 
-const RegisterExpenses = () => {
+const RegisterBudgetDetailScreen = () => {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [budgetDetail, setBudgetDetail] = useState(budgetDetailState);
@@ -39,9 +42,9 @@ const RegisterExpenses = () => {
   const {user} = useAuth();
   const [saveBudgetDetail] = useMutation(SAVE_BUDGET_DETAIL);
   const toast = useToast();
-  0;
+
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || budgetDetail.year;
+    const currentDate = selectedDate || budgetDetail.bd_date;
     setShow(false);
     setBudgetDetail({...budgetDetail, bd_date: currentDate});
   };
@@ -61,12 +64,16 @@ const RegisterExpenses = () => {
 
   const handleAddBudgetDetail = async () => {
     validations.description = false;
+    validations.amount = false;
 
     if (budgetDetail.bd_description.trim() === '') {
       validations.description = true;
     }
+    if (budgetDetail.bd_paymentAmount.trim() === '') {
+      validations.amount = true;
+    }
 
-    if (!validations.description) {
+    if (!validations.description && !validations.amount) {
       try {
         await saveBudgetDetail({
           variables: {
@@ -85,13 +92,15 @@ const RegisterExpenses = () => {
           placement: 'bottom',
         });
       }
-      setValidations({...validationsState});
+      setValidations(validationsState);
     } else {
       setValidations({...validations});
     }
 
     setLoading(false);
   };
+
+  if (loading) return <Loading />;
 
   return (
     <ScrollView
@@ -112,6 +121,28 @@ const RegisterExpenses = () => {
         <Heading textAlign="center">Register Expense</Heading>
 
         <Box>
+          <FormControl>
+            <FormControl.Label>
+              <Text>Document Type:</Text>
+            </FormControl.Label>
+            <Radio.Group
+              name="myRadioGroup"
+              accessibilityLabel="favorite number"
+              value={budgetDetail.bd_type}
+              onChange={nextValue => {
+                setBudgetDetail({...budgetDetail, bd_type: nextValue});
+              }}>
+              <Radio value="E" my={1}>
+                Expense
+              </Radio>
+              <Radio value="I" my={1}>
+                Income
+              </Radio>
+            </Radio.Group>
+          </FormControl>
+        </Box>
+
+        <Box>
           <FormControl isInvalid={validations.description} mb="5">
             <FormControl.Label>
               <Text>Description:</Text>
@@ -130,10 +161,11 @@ const RegisterExpenses = () => {
             />
           </FormControl>
         </Box>
+
         <Box>
           <FormControl mb="5">
             <FormControl.Label>
-              <Text>Year:</Text>
+              <Text>Date:</Text>
             </FormControl.Label>
             <Box>
               <Input
@@ -157,16 +189,54 @@ const RegisterExpenses = () => {
           </FormControl>
         </Box>
 
+        <Box>
+          <FormControl isInvalid={validations.amount} mb="5">
+            <FormControl.Label>
+              <Text>Amount:</Text>
+            </FormControl.Label>
+            <Input
+              value={budgetDetail.bd_paymentAmount}
+              type="number"
+              name="amount"
+              placeholder="Amount..."
+              onChangeText={text =>
+                setBudgetDetail({...budgetDetail, bd_paymentAmount: text})
+              }
+            />
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl>
+            <FormControl.Label>
+              <Text>Payment Type:</Text>
+            </FormControl.Label>
+            <Radio.Group
+              name="myRadioGroup"
+              accessibilityLabel="favorite number"
+              value={budgetDetail.bd_paymentType}
+              onChange={nextValue => {
+                setBudgetDetail({...budgetDetail, bd_paymentType: nextValue});
+              }}>
+              <Radio value="F" my={1}>
+                Permanent
+              </Radio>
+              <Radio value="V" my={1}>
+                Variable
+              </Radio>
+            </Radio.Group>
+          </FormControl>
+        </Box>
+
         <Button
           mt="5"
           bg="#01234c"
           _pressed={{bg: '#06182e'}}
           onPress={() => setLoading(true)}>
-          <Text color="#ffffff">Save Expense</Text>
+          <Text color="#ffffff">Save Budget Detail</Text>
         </Button>
       </Stack>
     </ScrollView>
   );
 };
 
-export default RegisterExpenses;
+export default RegisterBudgetDetailScreen;
