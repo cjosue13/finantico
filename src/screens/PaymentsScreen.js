@@ -29,7 +29,7 @@ const PaymentsScreen = ({colorTitle}) => {
       mt="5"
       mb="5">
       <Heading textAlign="center" color={colorTitle}>
-        List of BudgetDetails
+        List of Budget Details
       </Heading>
 
       <ScrollView

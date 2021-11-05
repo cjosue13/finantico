@@ -8,7 +8,7 @@ const MovieCard = ({budgetDetail}) => {
   const [open, setOpen] = useState(false);
   return (
     <HStack w="100%">
-      <Box w="100%" bg="#01234c" p="1" borderRadius="25">
+      <Box w="100%" bg="#01234c" p="1" borderRadius="10">
         <HStack>
           <Box ml="5">
             <Text
