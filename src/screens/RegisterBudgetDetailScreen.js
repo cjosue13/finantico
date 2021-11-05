@@ -118,7 +118,7 @@ const RegisterBudgetDetailScreen = () => {
           base: '100%',
           md: '25%',
         }}>
-        <Heading textAlign="center">Register Expense</Heading>
+        <Heading textAlign="center">Register Budget Detail</Heading>
 
         <Box>
           <FormControl>
