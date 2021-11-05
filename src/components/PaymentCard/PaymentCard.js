@@ -9,17 +9,16 @@ const MovieCard = ({budgetDetail}) => {
   return (
     <HStack w="100%">
       <Box w="100%" bg="#01234c" p="1" borderRadius="10">
-        <HStack>
-          <Box ml="5">
-            <Text
-              textAlign="left"
-              color="white"
-              fontWeight="medium"
-              fontSize={15}>
-              {budgetDetail.bd_description}
-            </Text>
-          </Box>
-        </HStack>
+        <Box ml="2%">
+          <Text
+            bold
+            textAlign="left"
+            color="white"
+            fontWeight="medium"
+            fontSize={16}>
+            {budgetDetail.bd_description}
+          </Text>
+        </Box>
 
         {open && <Details budgetDetail={budgetDetail} />}
 
