@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-raw-text */
 import {
   Box,
@@ -12,6 +13,7 @@ import {
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {useAuth} from '../context/AuthContext';
+import {Image} from 'react-native';
 
 const initialState = {
   mail: '',
@@ -32,6 +34,22 @@ const LoginScreen = ({setLogin}) => {
 
   return (
     <Center flex={1} w="100%">
+      <Box alignItems="center">
+        <Heading alignText="center" color="#ffffff">
+          LogIn
+        </Heading>
+      </Box>
+      <Box mt="5" mb="30">
+        <Image
+          size={150}
+          resizeMode={'contain'}
+          borderRadius={100}
+          source={require('../assets/FINANTICO.png')}
+          style={{width: 150, height: 150}}
+          alt="Alternate Text"
+        />
+      </Box>
+
       <Stack
         space={2.5}
         alignSelf="center"
@@ -41,11 +59,6 @@ const LoginScreen = ({setLogin}) => {
         w={{
           base: '100%',
         }}>
-        <Box alignItems="center">
-          <Heading alignText="center" color="#ffffff">
-            LogIn
-          </Heading>
-        </Box>
         <Box>
           <FormControl mb="5">
             <FormControl.Label>

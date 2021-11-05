@@ -1,6 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/no-raw-text */
 import {Box, Center, HStack, Pressable, Text} from 'native-base';
 import React, {useState} from 'react';
+import {Image} from 'react-native';
 import {useAuth} from '../context/AuthContext';
 import PaymentsScreen from './PaymentsScreen';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
@@ -10,10 +12,18 @@ const HomeScreen = () => {
   const {logout} = useAuth();
   return (
     <Box flex={1} bg="white" safeAreaTop>
-      <Center flex={1}>
-        {selected === 0 && (
-          <PaymentsScreen colorTitle={'#000000'} />
-        )}
+      <Box position="absolute" right={0} mt="5">
+        <Image
+          size={150}
+          resizeMode={'contain'}
+          borderRadius={100}
+          source={require('../assets/FINANTICO.png')}
+          style={{width: 80, height: 80}}
+          alt="Alternate Text"
+        />
+      </Box>
+      <Center position="relative" flex={1}>
+        {selected === 0 && <PaymentsScreen />}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterBudgetDetailScreen />}
       </Center>
