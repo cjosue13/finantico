@@ -1,14 +1,21 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-native/no-raw-text */
-import {useQuery} from '@apollo/react-hooks';
-import {Box, ScrollView, Stack} from 'native-base';
+import {
+  Box,
+  Center,
+  Flex,
+  HStack,
+  ScrollView,
+  Stack,
+  Text,
+  VStack,
+} from 'native-base';
 import React from 'react';
-import {GET_BUDGET_DETAILS_USER} from '../graphql/BudgetDetails/BudgetDetails.queries';
-import {useAuth} from '../context/AuthContext';
-import Loading from '../components/Loading/Loading';
-import PaymentCard from '../components/PaymentCard/PaymentCard';
+import {Pressable} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const PaymentsScreen = () => {
-  const {user} = useAuth();
+const PaymentsScreen = ({navigation}) => {
+  /* const {user} = useAuth();
   const {data, loading, error} = useQuery(GET_BUDGET_DETAILS_USER, {
     variables: {usu_uid: user.uid},
     pollInterval: 500,
@@ -17,7 +24,7 @@ const PaymentsScreen = () => {
   if (loading) return <Loading />;
   if (error) return `Error! ${error}`;
 
-  const budgetDetails = data?.getBudgetDetailsbyUser;
+  // const budgetDetails = data?.getBudgetDetailsbyUser; */
 
   return (
     <Box
@@ -26,30 +33,103 @@ const PaymentsScreen = () => {
         md: '90%',
       }}
       h="78%">
-      <ScrollView
-        w={{
-          base: '100%',
-          md: '90%',
-        }}
-        h="100%">
-        <Stack
-          space={2.5}
-          alignSelf="center"
-          px="4"
-          safeArea
-          mt="4"
-          w={{
-            base: '100%',
-            md: '25%',
-          }} h="100%">
-          {budgetDetails.map(budgetDetail => (
+      {/* budgetDetails.map(budgetDetail => (
             <PaymentCard
               key={`budgetDetauk-${budgetDetail.id}`}
               budgetDetail={budgetDetail}
             />
-          ))}
-        </Stack>
-      </ScrollView>
+          )) */}
+
+      <Stack alignItems="center" w="100%">
+        <Center>
+          <Text fontSize={32} bold>
+            Select Option
+          </Text>
+        </Center>
+        <HStack p="5" space="2" alignItems="center">
+          <Box w="33%">
+            <Pressable onPress={() => navigation.navigate('Income')}>
+              <Center
+                borderWidth="3"
+                borderColor="#5b5b5b"
+                rounded="8"
+                bg="#f2efef"
+                p="1">
+                <VStack>
+                  <Center>
+                    <Text fontSize={24} color="#707070" bold>
+                      Incomes
+                    </Text>
+                  </Center>
+                  <Box mt="1" justifyContent="center" alignItems="center">
+                    <FontAwesome5
+                      color="#707070"
+                      name={'file-download'}
+                      size={70}
+                      solid
+                    />
+                  </Box>
+                </VStack>
+              </Center>
+            </Pressable>
+          </Box>
+
+          <Box w="33%">
+            <Pressable onPress={() => navigation.navigate('Expense')}>
+              <Center
+                borderWidth="3"
+                borderColor="#5b5b5b"
+                rounded="8"
+                bg="#f2efef"
+                p="1">
+                <VStack>
+                  <Center>
+                    <Text fontSize={24} color="#707070" bold>
+                      Expenses
+                    </Text>
+                  </Center>
+                  <Box mt="1" justifyContent="center" alignItems="center">
+                    <FontAwesome5
+                      color="#707070"
+                      name={'file-upload'}
+                      size={70}
+                      solid
+                    />
+                  </Box>
+                </VStack>
+              </Center>
+            </Pressable>
+          </Box>
+
+          <Box w="33%">
+            <Pressable onPress={() => navigation.navigate('Card')}>
+              <Center
+                borderWidth="3"
+                borderColor="#5b5b5b"
+                rounded="8"
+                bg="#f2efef"
+                p="1">
+                <VStack>
+                  <Center>
+                    <Text fontSize={24} color="#707070" bold>
+                      Cards
+                    </Text>
+                  </Center>
+
+                  <Box mt="1" justifyContent="center" alignItems="center">
+                    <FontAwesome5
+                      color="#707070"
+                      name={'credit-card'}
+                      size={70}
+                      solid
+                    />
+                  </Box>
+                </VStack>
+              </Center>
+            </Pressable>
+          </Box>
+        </HStack>
+      </Stack>
     </Box>
   );
 };

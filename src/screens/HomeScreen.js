@@ -6,8 +6,9 @@ import {Image} from 'react-native';
 import {useAuth} from '../context/AuthContext';
 import PaymentsScreen from './PaymentsScreen';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [selected, setSelected] = useState(0);
   const {logout} = useAuth();
   return (
@@ -23,7 +24,8 @@ const HomeScreen = () => {
         />
       </Box>
       <Center position="relative" flex={1}>
-        {selected === 0 && <PaymentsScreen />}
+        {/*<Icon name="eye-slash" size={100} color="#900" solid/>;*/}
+        {selected === 0 && <PaymentsScreen navigation={navigation} />}
         {/* selected === 1 && <FavoriteScreen /> */}
         {selected === 1 && <RegisterBudgetDetailScreen />}
       </Center>
