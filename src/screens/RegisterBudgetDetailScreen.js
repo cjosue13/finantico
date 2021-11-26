@@ -15,9 +15,11 @@ import {
 import React, {useEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {useAuth} from '../context/AuthContext';
-import {useMutation} from '@apollo/client';
+import {useMutation, useQuery} from '@apollo/client';
 import {SAVE_BUDGET_DETAIL} from '../graphql/BudgetDetails/BudgetDetails.mutations';
 import Loading from '../components/Loading/Loading';
+import RNPickerSelect from 'react-native-picker-select';
+import {GET_CARDS_BY_USER} from '../graphql/Cards/Cards.queries';
 
 const budgetDetailState = {
   bd_description: '',
@@ -25,7 +27,8 @@ const budgetDetailState = {
   bd_paymentType: 'F',
   bd_paymentAmount: '',
   bd_type: 'E',
-  usu_uid: '',
+  paid: 'N',
+  card: undefined,
 };
 
 const validationsState = {
@@ -38,8 +41,12 @@ const RegisterBudgetDetailScreen = () => {
   const [show, setShow] = useState(false);
   const [budgetDetail, setBudgetDetail] = useState(budgetDetailState);
   const [validations, setValidations] = useState(validationsState);
-  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const {user} = useAuth();
+  const {data, error, loading} = useQuery(GET_CARDS_BY_USER, {
+    variables: {usu_uid: user.uid},
+    pollInterval: 500,
+  });
   const [saveBudgetDetail] = useMutation(SAVE_BUDGET_DETAIL);
   const toast = useToast();
 
@@ -59,8 +66,8 @@ const RegisterBudgetDetailScreen = () => {
   };
 
   useEffect(() => {
-    if (loading) handleAddBudgetDetail();
-  }, [loading]);
+    if (saving) handleAddBudgetDetail();
+  }, [saving]);
 
   const handleAddBudgetDetail = async () => {
     validations.description = false;
@@ -77,7 +84,7 @@ const RegisterBudgetDetailScreen = () => {
       try {
         await saveBudgetDetail({
           variables: {
-            input: {...budgetDetail, usu_uid: user.uid},
+            input: budgetDetail,
           },
         });
         toast.show({
@@ -97,10 +104,31 @@ const RegisterBudgetDetailScreen = () => {
       setValidations({...validations});
     }
 
-    setLoading(false);
+    setSaving(false);
   };
 
-  if (loading) return <Loading />;
+  if (error)
+    return (
+      <Box>
+        <Heading textAlign="center">An unexpected error has occurred</Heading>
+      </Box>
+    );
+
+  if (loading || saving) return <Loading />;
+
+  const cards = data.getCardsByUser.map(card => ({
+    key: `card-${card.id}`,
+    label: card.name,
+    inputLabel: card.name,
+    value: card.id,
+  }));
+
+  if (cards.length === 0)
+    return (
+      <Box>
+        <Heading textAlign="center">Please enter the cards first</Heading>
+      </Box>
+    );
 
   return (
     <ScrollView
@@ -227,11 +255,27 @@ const RegisterBudgetDetailScreen = () => {
           </FormControl>
         </Box>
 
+        <Box>
+          <FormControl>
+            <FormControl.Label>
+              <Text>Select a Card:</Text>
+            </FormControl.Label>
+            <RNPickerSelect
+              onValueChange={value =>
+                setBudgetDetail({...budgetDetail, card: value})
+              }
+              items={cards}
+              value={budgetDetail.card}
+            />
+          </FormControl>
+        </Box>
+
         <Button
           mt="5"
+          mb="5"
           bg="#01234c"
           _pressed={{bg: '#06182e'}}
-          onPress={() => setLoading(true)}>
+          onPress={() => setSaving(true)}>
           <Text color="#ffffff">Save Budget Detail</Text>
         </Button>
       </Stack>

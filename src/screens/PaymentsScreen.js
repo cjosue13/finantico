@@ -3,9 +3,7 @@
 import {
   Box,
   Center,
-  Flex,
   HStack,
-  ScrollView,
   Stack,
   Text,
   VStack,

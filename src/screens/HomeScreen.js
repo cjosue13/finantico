@@ -6,7 +6,8 @@ import {Image} from 'react-native';
 import {useAuth} from '../context/AuthContext';
 import PaymentsScreen from './PaymentsScreen';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
-// import Icon from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import RegisterCardScreen from './RegisterCardScreen';
 
 const HomeScreen = ({navigation}) => {
   const [selected, setSelected] = useState(0);
@@ -24,10 +25,9 @@ const HomeScreen = ({navigation}) => {
         />
       </Box>
       <Center position="relative" flex={1}>
-        {/*<Icon name="eye-slash" size={100} color="#900" solid/>;*/}
         {selected === 0 && <PaymentsScreen navigation={navigation} />}
-        {/* selected === 1 && <FavoriteScreen /> */}
-        {selected === 1 && <RegisterBudgetDetailScreen />}
+        {selected === 1 && <RegisterCardScreen />}
+        {selected === 2 && <RegisterBudgetDetailScreen />}
       </Center>
       <HStack bg="#01234c" alignItems="center" safeAreaBottom>
         <Pressable
@@ -41,26 +41,14 @@ const HomeScreen = ({navigation}) => {
             </Text>
           </Center>
         </Pressable>
-        {/* <Pressable
-            cursor="pointer"
-            opacity={selected === 1 ? 1 : 0.5}
-            py="2"
-            flex={1}
-            onPress={() => setSelected(1)}>
-            <Center>
-              <Text bold color="white" fontSize={18}>
-                Favorites
-              </Text>
-            </Center>
-          </Pressable> */}
         <Pressable
-          opacity={selected === 1 ? 1 : 0.6}
+          opacity={selected === 1 ? 1 : 0.5}
           py="2"
           flex={1}
           onPress={() => setSelected(1)}>
           <Center>
             <Text bold color="white" fontSize={18}>
-              Budget Detail
+              Card
             </Text>
           </Center>
         </Pressable>
@@ -68,11 +56,32 @@ const HomeScreen = ({navigation}) => {
           opacity={selected === 2 ? 1 : 0.6}
           py="2"
           flex={1}
-          onPress={() => logout()}>
+          onPress={() => setSelected(2)}>
           <Center>
             <Text bold color="white" fontSize={18}>
-              Logout
+              Budget
             </Text>
+          </Center>
+        </Pressable>
+        <Pressable
+          opacity={selected === 3 ? 1 : 0.6}
+          py="2"
+          flex={1}
+          onPress={() => logout()}>
+          <Center>
+            <HStack>
+              <Text bold color="white" fontSize={18}>
+                Logout
+              </Text>
+              <Center ml="2">
+                <FontAwesome5
+                  color="white"
+                  size={30}
+                  name={'sign-out-alt'}
+                  solid
+                />
+              </Center>
+            </HStack>
           </Center>
         </Pressable>
       </HStack>
