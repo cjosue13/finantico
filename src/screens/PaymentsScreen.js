@@ -39,11 +39,6 @@ const PaymentsScreen = ({navigation}) => {
           )) */}
 
       <Stack alignItems="center" w="100%">
-        <Center>
-          <Text fontSize={32} bold>
-            Select Option
-          </Text>
-        </Center>
         <HStack p="5" space="2" alignItems="center">
           <Box w="33%">
             <Pressable onPress={() => navigation.navigate('Income')}>
@@ -55,7 +50,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={20} color="#707070" bold>
+                    <Text fontSize={20} color="black" bold>
                       Incomes
                     </Text>
                   </Center>
@@ -82,7 +77,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={20} color="#707070" bold>
+                    <Text fontSize={20} color="black" bold>
                       Expenses
                     </Text>
                   </Center>
@@ -109,7 +104,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={20} color="#707070" bold>
+                    <Text fontSize={20} color="black" bold>
                       Cards
                     </Text>
                   </Center>
@@ -138,7 +133,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={20} color="#707070" bold>
+                    <Text fontSize={20} color="black" bold>
                       Balance
                     </Text>
                   </Center>

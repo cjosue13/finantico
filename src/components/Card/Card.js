@@ -47,16 +47,6 @@ const Card = ({navigation, Card}) => {
                 </Text>
               </Text>
             </Box>
-            {Card?.balance && (
-              <Box>
-                <Text bold fontSize={14} color="black">
-                  Amount:&nbsp;&nbsp;
-                  <Text mt="2" fontSize={12} color="black">
-                    ₡{Card.balance}
-                  </Text>
-                </Text>
-              </Box>
-            )}
           </VStack>
         </HStack>
       </Center>

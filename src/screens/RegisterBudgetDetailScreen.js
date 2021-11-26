@@ -98,8 +98,6 @@ const RegisterBudgetDetailScreen = () => {
           card => budgetDetail.card === card.id,
         );
 
-        console.log(card);
-
         PushNotification.localNotificationSchedule({
           channelId: 'finantico_id', // (required)
           channelName: 'Finantico',

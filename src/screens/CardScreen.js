@@ -1,7 +1,6 @@
 import {useQuery} from '@apollo/client';
 import {Box, Center, Heading} from 'native-base';
 import React from 'react';
-import {View, Text} from 'react-native';
 import ListCards from '../components/ListCards/ListCards';
 import Loading from '../components/Loading/Loading';
 import {useAuth} from '../context/AuthContext';
@@ -15,8 +14,10 @@ const CardScreen = ({navigation}) => {
 
   if (error)
     return (
-      <Box>
-        <Heading textAlign="center">An unexpected error has occurred</Heading>
+      <Box flex={1} bg="white" safeAreaTop>
+        <Center flex={1}>
+          <Heading textAlign="center">An unexpected error has occurred</Heading>
+        </Center>
       </Box>
     );
 

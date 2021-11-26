@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import {Box, Heading, ScrollView, VStack} from 'native-base';
 import React from 'react';
-import Card from '../Card/Card';
+import CardBalance from '../CardBalance/CardBalance';
 
-const ListCards = ({Cards, navigation}) => {
+const ListBalance = ({Cards}) => {
   if (Cards.length === 0)
     return (
       <Box bg="white">
@@ -14,19 +14,15 @@ const ListCards = ({Cards, navigation}) => {
   return (
     <ScrollView bg="white">
       <Box mt="5">
-        <Heading textAlign="center">Available Cards</Heading>
+        <Heading textAlign="center">Summary</Heading>
       </Box>
       <VStack p="5" space="2" alignItems="center">
         {Cards.map(card => (
-          <Card
-            key={`card-list-item${card.id}`}
-            Card={card}
-            navigation={navigation}
-          />
+          <CardBalance key={`card-list-item${card.id}`} Card={card} />
         ))}
       </VStack>
     </ScrollView>
   );
 };
 
-export default ListCards;
+export default ListBalance;

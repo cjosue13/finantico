@@ -1,8 +1,7 @@
 import {useQuery} from '@apollo/client';
 import {Box, Center, Heading} from 'native-base';
 import React from 'react';
-import {View, Text} from 'react-native';
-import ListCards from '../components/ListCards/ListCards';
+import ListBalance from '../components/ListBalance/ListBalance';
 import Loading from '../components/Loading/Loading';
 import {useAuth} from '../context/AuthContext';
 import {GET_CARDS_BY_USER} from '../graphql/Cards/Cards.queries';
@@ -31,7 +30,7 @@ const BalanceScreen = ({navigation}) => {
 
   const cards = data.getCardsByUser;
 
-  return <ListCards navigation={navigation} Cards={cards} />;
+  return <ListBalance navigation={navigation} Cards={cards} />;
 };
 
 export default BalanceScreen;

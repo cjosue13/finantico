@@ -8,3 +8,12 @@ export const SAVE_BUDGET_DETAIL = gql`
     }
   }
 `;
+
+export const UPDATE_BUDGET_DETAIL = gql`
+  mutation updateBudgetDetail($input: budgetUpdate) {
+    updateBudgetDetail(input: $input) {
+      id
+      bd_description
+    }
+  }
+`;
