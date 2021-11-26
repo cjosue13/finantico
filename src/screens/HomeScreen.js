@@ -8,6 +8,7 @@ import PaymentsScreen from './PaymentsScreen';
 import RegisterBudgetDetailScreen from './RegisterBudgetDetailScreen';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import RegisterCardScreen from './RegisterCardScreen';
+import BalanceScreen from './BalanceScreen';
 
 const HomeScreen = ({navigation}) => {
   const [selected, setSelected] = useState(0);
@@ -28,6 +29,7 @@ const HomeScreen = ({navigation}) => {
         {selected === 0 && <PaymentsScreen navigation={navigation} />}
         {selected === 1 && <RegisterCardScreen />}
         {selected === 2 && <RegisterBudgetDetailScreen />}
+        {selected === 3 && <BalanceScreen />}
       </Center>
       <HStack bg="#01234c" alignItems="center" safeAreaBottom>
         <Pressable
@@ -60,6 +62,17 @@ const HomeScreen = ({navigation}) => {
           <Center>
             <Text bold color="white" fontSize={18}>
               Budget
+            </Text>
+          </Center>
+        </Pressable>
+        <Pressable
+          opacity={selected === 2 ? 1 : 0.6}
+          py="2"
+          flex={1}
+          onPress={() => setSelected(3)}>
+          <Center>
+            <Text bold color="white" fontSize={18}>
+              Balance
             </Text>
           </Center>
         </Pressable>

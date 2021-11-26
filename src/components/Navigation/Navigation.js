@@ -11,6 +11,7 @@ import ExpenseScreen from '../../screens/ExpenseScreen';
 import IncomeScreen from '../../screens/IncomeScreen';
 import CardScreen from '../../screens/CardScreen';
 import SummaryCardScreen from '../../screens/SummaryCardScreen';
+import BalanceScreen from '../../screens/BalanceScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -53,6 +54,11 @@ const Navigation = () => {
             name="Summary-Card"
             component={SummaryCardScreen}
             options={{title: 'Summary Card'}}
+          />
+          <Stack.Screen
+            name="Balance"
+            component={BalanceScreen}
+            options={{title: 'Balance'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

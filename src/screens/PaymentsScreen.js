@@ -55,7 +55,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={24} color="#707070" bold>
+                    <Text fontSize={20} color="#707070" bold>
                       Incomes
                     </Text>
                   </Center>
@@ -82,7 +82,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={24} color="#707070" bold>
+                    <Text fontSize={20} color="#707070" bold>
                       Expenses
                     </Text>
                   </Center>
@@ -109,7 +109,7 @@ const PaymentsScreen = ({navigation}) => {
                 p="1">
                 <VStack>
                   <Center>
-                    <Text fontSize={24} color="#707070" bold>
+                    <Text fontSize={20} color="#707070" bold>
                       Cards
                     </Text>
                   </Center>
@@ -118,6 +118,34 @@ const PaymentsScreen = ({navigation}) => {
                     <FontAwesome5
                       color="#707070"
                       name={'credit-card'}
+                      size={70}
+                      solid
+                    />
+                  </Box>
+                </VStack>
+              </Center>
+            </Pressable>
+          </Box>
+        </HStack>
+        <HStack p="5" space="2" alignItems="center">
+        <Box w="100%">
+            <Pressable onPress={() => navigation.navigate('Balance')}>
+              <Center
+                borderWidth="3"
+                borderColor="#5b5b5b"
+                rounded="8"
+                bg="#f2efef"
+                p="1">
+                <VStack>
+                  <Center>
+                    <Text fontSize={20} color="#707070" bold>
+                      Balance
+                    </Text>
+                  </Center>
+                  <Box mt="1" justifyContent="center" alignItems="center">
+                    <FontAwesome5
+                      color="#707070"
+                      name={'balance-scale-right'}
                       size={70}
                       solid
                     />
