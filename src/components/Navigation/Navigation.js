@@ -10,6 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import ExpenseScreen from '../../screens/ExpenseScreen';
 import IncomeScreen from '../../screens/IncomeScreen';
 import CardScreen from '../../screens/CardScreen';
+import SummaryCardScreen from '../../screens/SummaryCardScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -47,6 +48,11 @@ const Navigation = () => {
             name="Card"
             component={CardScreen}
             options={{title: 'Cards'}}
+          />
+          <Stack.Screen
+            name="Summary-Card"
+            component={SummaryCardScreen}
+            options={{title: 'Summary Card'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

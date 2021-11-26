@@ -22,7 +22,7 @@ const initialState = {
   name: '',
   type: 'C',
   description: '',
-  balance: '',
+  balance: '0.0',
 };
 
 const RegisterCardScreen = () => {
@@ -43,10 +43,11 @@ const RegisterCardScreen = () => {
           input: {
             ...state,
             usu_uid: user.uid,
-            balance: isCredit ? state.balance : null,
+            balance: !isCredit ? state.balance : null,
           },
         },
       });
+
       toast.show({
         title: 'Card saved successfully!',
         placement: 'bottom',

@@ -20,6 +20,7 @@ import {SAVE_BUDGET_DETAIL} from '../graphql/BudgetDetails/BudgetDetails.mutatio
 import Loading from '../components/Loading/Loading';
 import RNPickerSelect from 'react-native-picker-select';
 import {GET_CARDS_BY_USER} from '../graphql/Cards/Cards.queries';
+import PushNotification from 'react-native-push-notification';
 
 const budgetDetailState = {
   bd_description: '',
@@ -87,10 +88,30 @@ const RegisterBudgetDetailScreen = () => {
             input: budgetDetail,
           },
         });
+
         toast.show({
           title: 'Budget Detail saved successfully!',
           placement: 'bottom',
         });
+
+        const card = data.getCardsByUser.find(
+          card => budgetDetail.card === card.id,
+        );
+
+        console.log(card);
+
+        PushNotification.localNotificationSchedule({
+          channelId: 'finantico_id', // (required)
+          channelName: 'Finantico',
+          title: `Recordatorio de tu tarjeta ${card.name}`,
+          message:
+            'Revisa la aplicación debido a que tienes cercana una acción en tu tarjeta',
+          date: new Date(Date.now() + 60 * 1000), // in 60 secs
+          allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
+
+          /* Android Only Properties */ 
+          repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
+        }); 
 
         setBudgetDetail(budgetDetailState);
       } catch (error) {
